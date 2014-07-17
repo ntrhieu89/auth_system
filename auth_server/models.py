@@ -1,6 +1,14 @@
 from django.db import models
 
+class Role(models.Model):
+    role = models.CharField(max_length=50, blank=False, default='')
+    
+    class Meta:
+        db_table = u'roles';
+
 class User(models.Model):
+    role = models.ForeignKey(Role, related_name='users_roles');
+    
     username = models.CharField(max_length=30, blank=False, default='')
     password = models.CharField(max_length=512, blank=False, default='')
     email = models.CharField(max_length=100, blank = False, default='')
